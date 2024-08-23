@@ -1,0 +1,16 @@
+{
+  "name": "auto-upgrade-npm-deps",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "child_process": "^1.0.2"
+  },
+  "scripts": {
+    "dev": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
