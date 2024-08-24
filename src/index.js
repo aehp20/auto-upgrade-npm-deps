@@ -17,11 +17,17 @@ function upgradeDependencies(cmdCd, cmdTarget) {
     console.log('*** Nothing to update for ***');
   } else {
     const deps = items.filter(item => item !== '' && !item.startsWith('Checking') && !item.startsWith('Run'));
-    const depNamesOrigin = deps.map(dep => dep.split(' ')[0]);
+    const depsData = {};
+    const depNamesOrigin = deps.map(dep => {
+      const name = dep.split(' ')[0];
+      depsData[name] = dep;
+      return name;
+    });
     const depNames = depNamesOrigin.filter(item => !EXCLUDE_DEPS.includes(item));
 
     if (depNames.length === 0) {
-      console.log('*** Some excluded dependencies were found ***\n', depNamesOrigin);
+      console.log('*** Some excluded dependencies were found ***');
+      depNamesOrigin.forEach(item=>console.log(depsData[item]), '\n');
     } else {
       console.log('*** dep names ***\n', depNames);
 
