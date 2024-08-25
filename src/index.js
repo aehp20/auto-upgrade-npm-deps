@@ -59,7 +59,7 @@ function upgradeDependencies(cmdCd, cmdTarget) {
       if (!isError) {
         const cmdGitPush = "git push";
         const output = execSync(`${cmdCd} && ${cmdGitPush}`, { encoding: 'utf-8' });
-        console.log('*** output ***\n', output);
+        console.log('*** successfully upgraded dependencies ***\n', output);
       }
     }
   }
