@@ -19,24 +19,31 @@ function upgradeDependencies(cmdCd, cmdTarget) {
     const deps = items.filter(item => item !== '' && !item.startsWith('Checking') && !item.startsWith('Run'));
     const depsData = {};
     const depNamesOrigin = deps.map(dep => {
-      const name = dep.split(' ')[0];
-      depsData[name] = dep;
+      const items = dep.split(' ').filter(item => item !== '');
+      const name = items[0];
+      const currentVersion = items[1];
+      const newVersion = items[3];
+      depsData[name] = {name, currentVersion, newVersion};
       return name;
     });
     const depNames = depNamesOrigin.filter(item => !EXCLUDE_DEPS.includes(item));
 
     if (depNames.length === 0) {
       console.log('*** Some excluded dependencies were found ***');
-      depNamesOrigin.forEach(item=>console.log(depsData[item]), '\n');
+      depNamesOrigin.forEach(item=> {
+        const { name, currentVersion, newVersion } = depsData[item];
+        console.log(name, currentVersion, '→', newVersion, '\n');
+      });
     } else {
-      console.log('*** dep names ***\n', depNames);
+      console.log('*** Dependencies names ***\n', depNames);
 
       let isError = false;
 
       for (const depName of depNames) {
+        const { currentVersion, newVersion } = depsData[depName];
         const cmdNcu = `ncu ${depName} --doctor -u`;
         const cmdGitAdd = "git add package.json package-lock.json";
-        const cmdGitCommit = `git commit -m "chore: :wrench: upgrade ${depName}"`;
+        const cmdGitCommit = `git commit -m "chore: :wrench: upgrade ${depName} (${currentVersion} → ${newVersion})"`;
         try {
           const output = execSync(`${cmdCd} && ${cmdNcu} && ${cmdGitAdd} && ${cmdGitCommit}`, { encoding: 'utf-8' });
           console.log('*** output ***\n', output);
