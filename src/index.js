@@ -5,18 +5,23 @@ const EXCLUDE_DEPS = ['eslint', '@eslint/js'];
 const cmdCd = "cd /Users/home/learn/github/nx-todo/nx-todo-frontend";
 const cmdTargetPatch = "ncu --target patch";
 const cmdTargetMinor = "ncu --target minor";
+const mainBranch = "main";
+
+const cmdGitFetch = "git fetch -p";
+const cmdGitCheckout = `git checkout ${mainBranch}`;
+const cmdGitPull = "git pull";
 
 function upgradeDependencies(cmdCd, cmdTarget) {
   console.log(`*** Upgrade Dependencies for ${cmdTarget} ***`);
 
-  const output = execSync(`${cmdCd} && ${cmdTarget}`, { encoding: 'utf-8' });
+  const output = execSync(`${cmdCd} && ${cmdGitFetch} &&  ${cmdGitCheckout} && ${cmdGitPull} && ${cmdTarget}`, { encoding: 'utf-8' });
 
   const items = output.split('\n').map(item => item.trim());
 
   if (items.length === 4) {
     console.log('*** Nothing to update for ***');
   } else {
-    const deps = items.filter(item => item !== '' && !item.startsWith('Checking') && !item.startsWith('Run'));
+    const deps = items.filter(item => item !== '' && !item.startsWith('Checking') && !item.startsWith('Your') && !item.startsWith('Run') && !item.startsWith('Already'));
     const depsData = {};
     const depNamesOrigin = deps.map(dep => {
       const items = dep.split(' ').filter(item => item !== '');
