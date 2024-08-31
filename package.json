@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "node src/index.js",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
+    "lint": "eslint --fix .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",
@@ -15,6 +16,9 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@eslint/js": "^9.9.1",
+    "eslint": "^9.9.1",
+    "globals": "^15.9.0",
     "prettier": "^3.3.3"
   }
 }
