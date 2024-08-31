@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "node src/index.js",
-    "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
+    "format": "prettier --write \"**/*.+(js|ts|jsx|tsx|json)\"",
     "lint": "eslint --fix .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
