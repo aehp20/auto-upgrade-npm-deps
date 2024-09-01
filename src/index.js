@@ -1,8 +1,5 @@
 import { execSync } from 'child_process';
 
-// Hola
-const a = 1;
-
 const EXCLUDE_DEPS = ['eslint', '@eslint/js'];
 
 const cmdCd = 'cd /Users/home/learn/github/nx-todo/nx-todo-frontend';
