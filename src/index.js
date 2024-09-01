@@ -30,7 +30,8 @@ function upgradeDependencies(cmdCd, cmdTarget) {
         !item.startsWith('Checking') &&
         !item.startsWith('Your') &&
         !item.startsWith('Run') &&
-        !item.startsWith('Already'),
+        !item.startsWith('Already') &&
+        !item.startsWith('(use'),
     );
     const depsData = {};
     const depNamesOrigin = deps.map((dep) => {
