@@ -4,7 +4,7 @@ const EXCLUDE_DEPS = ['eslint', '@eslint/js'];
 
 const cmdCd = 'cd /Users/home/learn/github/nx-todo/nx-todo-frontend';
 const cmdTargetPatch = 'ncu --target patch';
-const cmdTargetMinor = 'ncu --target minor';
+//const cmdTargetMinor = 'ncu --target minor';
 const mainBranch = 'main';
 
 const cmdGitFetch = 'git fetch -p';
@@ -15,9 +15,11 @@ function upgradeDependencies(cmdCd, cmdTarget) {
   console.log(`*** Upgrade Dependencies for ${cmdTarget} ***`);
 
   const output = execSync(
-    `${cmdCd} && ${cmdGitFetch} &&  ${cmdGitCheckout} && ${cmdGitPull} && ${cmdTarget}`,
+    `${cmdCd} && ${cmdGitFetch} && ${cmdGitCheckout} && ${cmdGitPull} && ${cmdTarget}`,
     { encoding: 'utf-8' },
   );
+
+  console.log('*** output ***\n', output);
 
   const items = output.split('\n').map((item) => item.trim());
 
@@ -89,4 +91,4 @@ function upgradeDependencies(cmdCd, cmdTarget) {
 }
 
 upgradeDependencies(cmdCd, cmdTargetPatch);
-upgradeDependencies(cmdCd, cmdTargetMinor);
+//upgradeDependencies(cmdCd, cmdTargetMinor);

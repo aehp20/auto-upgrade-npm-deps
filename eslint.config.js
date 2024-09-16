@@ -11,7 +11,6 @@ export default [
     rules: {
       'no-console': 'warn',
       eqeqeq: 'error',
-      'capitalized-comments': 'error',
     },
   },
 ];
